@@ -1,0 +1,2 @@
+pyinstaller>=5.0
+# pywin32 should already be installed; if not: pip install pywin32

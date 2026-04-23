@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//mnt/c/Windows/System32/WindowsPowerShell/**)",
+      "Read(//mnt/c/Windows/System32/WindowsPowerShell/v1.0/**)",
+      "Bash(python3 -c \"import ctypes; print\\('ctypes ok'\\)\")",
+      "Bash(python3 -c \"import threading; print\\('threading ok'\\)\")",
+      "Bash(python3 -c \"import winreg; print\\('winreg ok'\\)\")"
+    ]
+  }
+}

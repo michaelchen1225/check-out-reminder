@@ -1,0 +1,45 @@
+We are building a Windows background utility called "Checkout Reminder" in Python.
+The project is at: C:\Users\pinyu\OneDrive\桌面\Lndata\project\check-out-reminder
+
+== What it does ==
+- When the app launches (auto-starts with Windows login), it records the current time as "work start time"
+- Work end time = start time + configurable work hours (default 9 hours)
+- At end time, it shows a Windows balloon notification + a tkinter modal popup telling the user to check out
+- If the app restarts mid-day, it restores the original start time from disk (doesn't reset the clock)
+
+== Stack ==
+- Python 3.10 at C:\Users\pinyu\AppData\Local\Programs\Python\Python310\
+- pywin32 (already installed) — system tray icon + balloon notifications
+- tkinter (stdlib) — modal dialog fallback
+- winreg (stdlib) — Registry auto-start toggle
+- PyInstaller — packages into dist\checkout_reminder.exe
+
+== Files created ==
+- checkout_reminder.py     main app (tray icon, timer, settings, notifications)
+- build.bat                runs PyInstaller to produce dist\checkout_reminder.exe
+- install_startup.bat      creates shortcut in Windows Startup folder
+- uninstall_startup.bat    removes startup shortcut
+- requirements.txt         pyinstaller>=5.0
+- .gitignore               excludes dist/, build/, __pycache__
+
+== Tray right-click menu ==
+Status / Snooze 15 min / Settings (change work hours) / Auto-start On/Off / Exit
+
+== Settings ==
+Work hours saved to: %APPDATA%\CheckoutReminder\config.json  { "work_hours": 9.0 }
+Start time saved to: %APPDATA%\CheckoutReminder\start_time.txt
+
+== How to run (dev) ==
+pythonw.exe checkout_reminder.py
+
+== How to deploy ==
+1. Add icon.ico to the project folder
+2. Run build.bat  →  produces dist\checkout_reminder.exe
+3. Run install_startup.bat  →  auto-starts on Windows login
+
+== To test notification quickly ==
+Change DEFAULT_HOURS = 9.0 to DEFAULT_HOURS = 0.01 in checkout_reminder.py (fires in ~36 sec), then revert.
+
+== How to resume this conversation in Claude Code ==
+  claude --continue       # jump straight back into the last session
+  claude --resume         # pick from a list of past sessions (if multiple exist)
